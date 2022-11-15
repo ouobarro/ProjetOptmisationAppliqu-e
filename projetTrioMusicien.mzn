@@ -30,10 +30,8 @@ set of int : NB_HEURE_MAX = 2..6;
 set of int : NIVEAU_MIN = 1..5;
 set of int : NIVEAU_MAX = 2..5;
 set of int : NB_STYLE_MIN = 1..3;
-
 array[MUSICIEN] of var MUSICIEN : duo1;
 array[MUSICIEN] of var MUSICIEN : duo2;
-
 array[MUSICIEN] of var NB_HEURE : nb_heure = [3,3,2,3,5,3,3,3,2,2,3,3];
 array[MUSICIEN] of var NIVEAU : niveau = [2,1,5,2,2,3,5,5,5,2,2,4];
 array[MUSICIEN] of var NB_HEURE_MIN : nb_heure_min = [2,1,1,1,3,1,1,3,2,1,3,3];
@@ -87,44 +85,40 @@ Angers
 ];
 
 /*=============================Les contraintes==========================*/
+%constraint forall(m in MUSICIEN)(card(trio[m]) == 2);
 
 constraint all_different(duo1);
 constraint all_different(duo2);
 
-constraint forall(m in MUSICIEN)(m != duo1[m] /\ m != duo2[m] /\ duo1[m] != duo2[m]);
-        
-        
-/*Les duos habitent la même ville*/
-constraint forall(m in MUSICIEN)(ville[m] == ville[duo1[m]] /\ ville[m] == ville[duo2[m]]);
+% les duos doivent être differents 
+constraint forall(m in MUSICIEN) (m != duo1[m] /\ m!=duo2[m] /\ duo1[m] != duo2[m]);
+
+/*Les trios habitent la même ville*/
+constraint forall(m in MUSICIEN) (ville[m] == ville[duo1[m]] /\ ville[m] == ville[duo2[m]]);
 
 /*le nombre d’heures voulues doit être dans le créneau Min - Max souhaité par l’autre*/
-constraint forall(m in MUSICIEN)(nb_heure[m] in nb_heure_min[duo1[m]]..nb_heure_max[duo1[m]]);
-constraint forall(m in MUSICIEN)(nb_heure[m] in nb_heure_min[duo2[m]]..nb_heure_max[duo2[m]]);
-%constraint forall(m in MUSICIEN)(nb_heure[duo1[m]] in nb_heure_min[duo2[m]]..nb_heure_max[duo2[m]]);
-%constraint forall(m in MUSICIEN)(nb_heure[duo1[m]] in nb_heure_min[m]..nb_heure_max[m]);
-%constraint forall(m in MUSICIEN)(nb_heure[duo2[m]] in nb_heure_min[duo1[m]]..nb_heure_max[duo1[m]]);
-%constraint forall(m in MUSICIEN)(nb_heure[duo2[m]] in nb_heure_min[m]..nb_heure_max[m]);
-                               
+constraint forall(m in MUSICIEN)(nb_heure[m] in nb_heure_min[duo1[m]]..nb_heure_max[duo1[m]] /\ nb_heure[m] in nb_heure_min[duo2[m]]..nb_heure_max[duo2[m]]);
+constraint forall(m in MUSICIEN)(nb_heure[duo1[m]] in nb_heure_min[m]..nb_heure_max[m] /\ nb_heure[duo1[m]] in nb_heure_min[duo2[m]]..nb_heure_max[duo2[m]]);
+constraint forall(m in MUSICIEN)(nb_heure[duo2[m]] in nb_heure_min[m]..nb_heure_max[m] /\ nb_heure[duo2[m]] in nb_heure_min[duo1[m]]..nb_heure_max[duo1[m]]);
 
 /*le nombre de style commun doit respecter les exigences de chacun*/
-%constraint forall(m in MUSICIEN)(card(style[m] intersect style[duo[m]]) >= nb_style_min[m]);
-%constraint forall(m in MUSICIEN)(card(style[m] intersect style[duo[m]]) >= nb_style_min[duo[m]]);
+constraint forall(m in MUSICIEN)(card(style[m] intersect style[duo1[m]]) >= 1);
+constraint forall(m in MUSICIEN)(card(style[m] intersect style[duo2[m]]) >= 1);
+constraint forall(m in MUSICIEN)(card(style[duo1[m]] intersect style[duo2[m]]) >= 1);
 
 /*deux musiciens jouant du même instrument ne peuvent former un duo*/
-%constraint forall(m in MUSICIEN)(instrument[m] != instrument[duo[m]]);
+constraint forall(m in MUSICIEN)(instrument[m] != instrument[duo1[m]] /\ instrument[m] != instrument[duo2[m]] /\ instrument[duo1[m]] != instrument[duo2[m]]);
 
-
-/*le niveau de chaque musicien du duo doit être dans l’intervalle de niveau accepté par
-l’autre musicien*/
-%constraint forall(m in MUSICIEN)(niveau[m] in niveau_min[duo[m]]..niveau_max[duo[m]]);
-%constraint forall(m in MUSICIEN)(niveau[duo[m]] in niveau_min[m]..niveau_max[m]);
+/*le niveau de chaque musicien du duo doit être dans l’intervalle de niveau accepté par l’autre musicien*/
+constraint forall(m in MUSICIEN)(niveau[m] in niveau_min[duo1[m]]..niveau_max[duo1[m]] /\ niveau[duo1[m]] in niveau_min[m]..niveau_max[m]);
+constraint forall(m in MUSICIEN)(niveau[m] in niveau_min[duo2[m]]..niveau_max[duo2[m]] /\ niveau[duo2[m]] in niveau_min[m]..niveau_max[m]);
+constraint forall(m in MUSICIEN)(niveau[duo1[m]] in niveau_min[duo2[m]]..niveau_max[duo2[m]] /\ niveau[duo2[m]] in niveau_min[duo1[m]]..niveau_max[duo1[m]]);
 
 /*le duo est consistant : il s’agit donc d’un matching parfait, c’est à dire que si m est associé à m’ alors m’ est associé aussi à m*/
-%constraint forall(m, n in MUSICIEN where n == duo[m]) (m == duo[n]);
 
 solve satisfy;
 
 
 output[
-          "\(p) <-> \(duo1[p]) <-> \(duo2[p]) \n" | p in MUSICIEN
+          "{\(p) | \(duo1[p])  | \(duo2[p]) }\n" | p in MUSICIEN
 ];
