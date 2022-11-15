@@ -30,58 +30,59 @@ set of int : NB_HEURE_MAX = 2..6;
 set of int : NIVEAU_MIN = 1..5;
 set of int : NIVEAU_MAX = 2..5;
 set of int : NB_STYLE_MIN = 1..3;
+
 array[MUSICIEN] of var MUSICIEN : duo1;
 array[MUSICIEN] of var MUSICIEN : duo2;
-array[MUSICIEN] of var NB_HEURE : nb_heure = [3,3,2,3,5,3,3,3,2,2,3,3];
-array[MUSICIEN] of var NIVEAU : niveau = [2,1,5,2,2,3,5,5,5,2,2,4];
-array[MUSICIEN] of var NB_HEURE_MIN : nb_heure_min = [2,1,1,1,3,1,1,3,2,1,3,3];
-array[MUSICIEN] of var NB_HEURE_MAX : nb_heure_max = [4,5,2,4,6,5,5,3,3,5,5,6];
-array[MUSICIEN] of var NIVEAU_MIN : niveau_min = [1,1,3,1,1,1,1,5,4,1,1,2];
-array[MUSICIEN] of var NIVEAU_MAX : niveau_max = [4,2,5,5,3,3,5,5,5,3,3,5];
-array[MUSICIEN] of var NB_STYLE_MIN : nb_style_min = [2,3,1,1,2,2,1,1,1,1,2,1];
+array[MUSICIEN] of var NB_HEURE : nb_heure = 			[3,	3,	2,	3,	5,	3,	3,	3,	2,	2,	3,	3];
+array[MUSICIEN] of var NIVEAU : niveau = 				[2,	1,	5,	2,	2,	3,	5,	5,	5,	2,	2,	4];
+array[MUSICIEN] of var NB_HEURE_MIN : nb_heure_min = 	[2,	1,	1,	1,	3,	1,	1,	2,	2,	1,	2,	3];
+array[MUSICIEN] of var NB_HEURE_MAX : nb_heure_max = 	[4,	5,	2,	4,	6,	5,	5,	3,	3,	5,	5,	6];
+array[MUSICIEN] of var NIVEAU_MIN : niveau_min = 		[1,	1,	3,	1,	1,	1,	1,	5,	4,	1,	1,	2];
+array[MUSICIEN] of var NIVEAU_MAX : niveau_max = 		[4,	2,	5,	5,	3,	3,	5,	5,	5,	3,	3,	5];
+array[MUSICIEN] of var NB_STYLE_MIN : nb_style_min = 	[2,	3,	1,	1,	2,	2,	1,	1,	1,	1,	2,	1];
 array[MUSICIEN] of set of STYLE : style = [
-{Rock, Metal, Jazz},
-{Jazz, Pop, Classique, Rock, Funk},
-{RnB, Rap,Classique},
-{Pop, Punk, Electro},
-{Classique, Metal, Jazz},
-{Punk, Rock, Classique, Jazz},
-{Pop, Rock, Jazz, Classique},
-{Classique},
-{Classique, Jazz},
-{Jazz, Electro},
-{Jazz, Rap, Funk, Rock, Electro},
-{Metal, Pop, Electro, Jazz, Classique}
+												{Rock, Metal, Jazz},
+												{Jazz, Pop, Classique, Rock, Funk},
+												{RnB, Rap,Classique},
+												{Pop, Punk, Electro},
+												{Classique, Metal, Jazz},
+												{Punk, Rock, Classique, Jazz},
+												{Pop, Rock, Jazz, Classique},
+												{Classique},
+												{Classique, Jazz},
+												{Jazz, Electro},
+												{Jazz, Rap, Funk, Rock, Electro},
+												{Metal, Pop, Electro, Jazz, Classique}
 ];
 
 array[MUSICIEN] of INSTRUMENT : instrument = [
-Basse,
-Batterie,
-Guitare,
-Batterie,
-Violon,
-Guitare,
-Piano,
-Violon,
-Piano,
-Piano,
-Basse,
-Basse
+												Basse,
+												Batterie,
+												Guitare,
+												Batterie,
+												Violon,
+												Guitare,
+												Piano,
+												Violon,
+												Piano,
+												Piano,
+												Basse,
+												Basse
 ];
 
 array[MUSICIEN] of VILLE : ville = [
-Angers,
-Nantes,
-Angers,
-Nantes,
-Angers,
-Angers,
-Nantes,
-Nantes,
-Angers,
-Nantes,
-Nantes,
-Angers
+												Angers,
+												Nantes,
+												Angers,
+												Nantes,
+												Angers,
+												Angers,
+												Nantes,
+												Nantes,
+												Angers,
+												Nantes,
+												Nantes,
+												Angers
 ];
 
 /*=============================Les contraintes==========================*/
@@ -117,7 +118,6 @@ constraint forall(m in MUSICIEN)(niveau[duo1[m]] in niveau_min[duo2[m]]..niveau_
 /*le duo est consistant : il s’agit donc d’un matching parfait, c’est à dire que si m est associé à m’ alors m’ est associé aussi à m*/
 
 solve satisfy;
-
 
 output[
           "{\(p) | \(duo1[p])  | \(duo2[p]) }\n" | p in MUSICIEN

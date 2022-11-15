@@ -41,48 +41,48 @@ array[MUSICIEN] of var NIVEAU_MIN : niveau_min = [1,1,3,1,1,1,1,5,4,1,1,2];
 array[MUSICIEN] of var NIVEAU_MAX : niveau_max = [4,2,5,5,3,3,5,5,5,3,3,5];
 array[MUSICIEN] of var NB_STYLE_MIN : nb_style_min = [2,3,1,1,2,2,1,1,1,1,2,1];
 array[MUSICIEN] of set of STYLE : style = [
-{Rock, Metal, Jazz},
-{Jazz, Pop, Classique, Rock, Funk},
-{RnB, Rap,Classique},
-{Pop, Punk, Electro},
-{Classique, Metal, Jazz},
-{Punk, Rock, Classique, Jazz},
-{Pop, Rock, Jazz, Classique},
-{Classique},
-{Classique, Jazz},
-{Jazz, Electro},
-{Jazz, Rap, Funk, Rock},
-{Metal, Pop, Electro, Jazz}
+												{Rock, Metal, Jazz},
+												{Jazz, Pop, Classique, Rock, Funk},
+												{RnB, Rap,Classique},
+												{Pop, Punk, Electro},
+												{Classique, Metal, Jazz},
+												{Punk, Rock, Classique, Jazz},
+												{Pop, Rock, Jazz, Classique},
+												{Classique},
+												{Classique, Jazz},
+												{Jazz, Electro},
+												{Jazz, Rap, Funk, Rock},
+												{Metal, Pop, Electro, Jazz}
 ];
 
 array[MUSICIEN] of INSTRUMENT : instrument = [
-Guitare,
-Batterie,
-Guitare,
-Batterie,
-Violon,
-Guitare,
-Piano,
-Violon,
-Piano,
-Piano,
-Basse,
-Basse
+												Guitare,
+												Batterie,
+												Guitare,
+												Batterie,
+												Violon,
+												Guitare,
+												Piano,
+												Violon,
+												Piano,
+												Piano,
+												Basse,
+												Basse
 ];
 
 array[MUSICIEN] of VILLE : ville = [
-Angers,
-Nantes,
-Angers,
-Nantes,
-Angers,
-Angers,
-Nantes,
-Nantes,
-Angers,
-Nantes,
-Nantes,
-Angers
+												Angers,
+												Nantes,
+												Angers,
+												Nantes,
+												Angers,
+												Angers,
+												Nantes,
+												Nantes,
+												Angers,
+												Nantes,
+												Nantes,
+												Angers
 ];
 
 /*=============================Les contraintes==========================*/
@@ -116,7 +116,6 @@ constraint forall(m in MUSICIEN)(niveau[duo[m]] in niveau_min[m]..niveau_max[m])
 constraint forall(m, n in MUSICIEN where n == duo[m]) (m == duo[n]);
 
 solve satisfy;
-
 
 output[
           "\(p) <-> \(duo[p]) \n" | p in MUSICIEN
