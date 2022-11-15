@@ -116,6 +116,8 @@ constraint forall(m in MUSICIEN)(niveau[m] in niveau_min[duo2[m]]..niveau_max[du
 constraint forall(m in MUSICIEN)(niveau[duo1[m]] in niveau_min[duo2[m]]..niveau_max[duo2[m]] /\ niveau[duo2[m]] in niveau_min[duo1[m]]..niveau_max[duo1[m]]);
 
 /*le duo est consistant : il s’agit donc d’un matching parfait, c’est à dire que si m est associé à m’ alors m’ est associé aussi à m*/
+constraint forall(m, n, o in MUSICIEN where n == duo1[m] /\ o == duo2[m]) ((m == duo1[n] \/ m == duo2[n]) /\ (m == duo1[o] \/ m == duo2[o]));
+constraint forall(m, n, o in MUSICIEN where n == duo2[m] /\ n == duo1[m]) ((m == duo1[n] \/ m == duo2[n]) /\ (m == duo1[o] \/ m == duo2[o]));
 
 solve satisfy;
 
