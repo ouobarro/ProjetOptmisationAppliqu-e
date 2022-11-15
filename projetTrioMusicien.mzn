@@ -1,71 +1,32 @@
 include "globals.mzn";
 
-enum MUSICIEN = 	{Alex,			Billie,			Chris,		Dora,		Emile,			Franck,		Gisele,		Horst, 		Iris, 		Jean,		Karl,		Lisa};
-enum STYLE = 		{Rock,			Metal,			Jazz, 		Pop, 		Classique,		Funk,		RnB,		Rap, 		Punk, 		Electro};
-enum INSTRUMENT = 	{Guitare,		Batterie,		Violon,		Piano, 		Basse};
-enum VILLE = 		{Angers,		Nantes};
+enum MUSICIEN ;
+enum STYLE ;
+enum INSTRUMENT ;
+enum VILLE ;
 
-set of int : NB_HEURE = 		2..5;
-set of int : NIVEAU = 			1..5;
-set of int : NB_HEURE_MIN = 	1..3;
-set of int : NB_HEURE_MAX = 	2..6;
-set of int : NIVEAU_MIN = 		1..5;
-set of int : NIVEAU_MAX = 		2..5;
-set of int : NB_STYLE_MIN = 	1..3;
+set of int : NB_HEURE;
+set of int : NIVEAU;
+set of int : NB_HEURE_MIN;
+set of int : NB_HEURE_MAX;
+set of int : NIVEAU_MIN;
+set of int : NIVEAU_MAX;
+set of int : NB_STYLE_MIN;
 
 array[MUSICIEN] of var MUSICIEN : trio1;
 array[MUSICIEN] of var MUSICIEN : trio2;
-array[MUSICIEN] of var NB_HEURE : nb_heure = 			[3,	3,	2,	3,	5,	3,	3,	3,	2,	2,	3,	3];
-array[MUSICIEN] of var NIVEAU : niveau = 				[2,	3,	5,	2,	2,	3,	3,	3,	5,	2,	2,	4];
-array[MUSICIEN] of var NB_HEURE_MIN : nb_heure_min = 	[2,	1,	1,	1,	2,	1,	1,	2,	2,	1,	2,	2];
-array[MUSICIEN] of var NB_HEURE_MAX : nb_heure_max = 	[5,	5,	5,	4,	6,	5,	5,	3,	3,	5,	5,	6];
-array[MUSICIEN] of var NIVEAU_MIN : niveau_min = 		[1,	1,	3,	1,	1,	1,	1,	2,	2,	1,	1,	2];
-array[MUSICIEN] of var NIVEAU_MAX : niveau_max = 		[5,	4,	5,	5,	3,	3,	5,	5,	5,	3,	3,	5];
-array[MUSICIEN] of var NB_STYLE_MIN : nb_style_min = 	[2,	3,	1,	1,	2,	2,	1,	1,	1,	1,	2,	1];
-array[MUSICIEN] of set of STYLE : style = [
-														{Rock,		Metal,		Jazz},
-														{Jazz,		Pop,		Classique,	Rock,	Funk},
-														{RnB,		Rap,		Classique},
-														{Pop,		Punk,		Electro},
-														{Classique,	Metal,		Jazz},
-														{Punk,		Rock,		Classique,	Jazz},
-														{Pop,		Rock,		Jazz,		Classique},
-														{Classique},
-														{Classique,	Jazz},
-														{Jazz, 		Electro},
-														{Jazz,		Rap,		Funk,		Rock,	Electro},
-														{Metal,		Pop,		Electro,	Jazz,	Classique}
-];
+array[MUSICIEN] of var NB_HEURE : nb_heure;
+array[MUSICIEN] of var NIVEAU : niveau;
+array[MUSICIEN] of var NB_HEURE_MIN : nb_heure_min ;
+array[MUSICIEN] of var NB_HEURE_MAX : nb_heure_max;
+array[MUSICIEN] of var NIVEAU_MIN : niveau_min;
+array[MUSICIEN] of var NIVEAU_MAX : niveau_max;
+array[MUSICIEN] of var NB_STYLE_MIN : nb_style_min;
+array[MUSICIEN] of set of STYLE : style ;
 
-array[MUSICIEN] of INSTRUMENT : instrument = [
-														Basse,
-														Batterie,
-														Guitare,
-														Batterie,
-														Violon,
-														Guitare,
-														Piano,
-														Violon,
-														Piano,
-														Piano,
-														Basse,
-														Basse
-];
+array[MUSICIEN] of INSTRUMENT : instrument ;
 
-array[MUSICIEN] of VILLE : ville = [
-														Angers,
-														Nantes,
-														Angers,
-														Nantes,
-														Angers,
-														Angers,
-														Nantes,
-														Nantes,
-														Angers,
-														Nantes,
-														Nantes,
-														Angers
-];
+array[MUSICIEN] of VILLE : ville ;
 
 /*=============================Les contraintes==========================*/
 %constraint forall(m in MUSICIEN)(card(trio[m]) == 2);

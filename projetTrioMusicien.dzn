@@ -1,0 +1,65 @@
+
+MUSICIEN = 	{Alex,			Billie,			Chris,		Dora,		Emile,			Franck,		Gisele,		Horst, 		Iris, 		Jean,		Karl,		Lisa};
+STYLE = 		{Rock,			Metal,			Jazz, 		Pop, 		Classique,		Funk,		RnB,		Rap, 		Punk, 		Electro};
+INSTRUMENT = 	{Guitare,		Batterie,		Violon,		Piano, 		Basse};
+VILLE = 		{Angers,		Nantes};
+
+NB_HEURE = 		2..5;
+NIVEAU = 			1..5;
+NB_HEURE_MIN = 	1..3;
+NB_HEURE_MAX = 	2..6;
+NIVEAU_MIN = 		1..5;
+NIVEAU_MAX = 		2..5;
+NB_STYLE_MIN = 	1..3;
+
+nb_heure = 			[3,	3,	2,	3,	5,	3,	3,	3,	2,	2,	3,	3];
+niveau = 				[2,	3,	5,	2,	2,	3,	3,	3,	5,	2,	2,	4];
+nb_heure_min = 	[2,	1,	1,	1,	2,	1,	1,	2,	2,	1,	2,	2];
+nb_heure_max = 	[5,	5,	5,	4,	6,	5,	5,	3,	3,	5,	5,	6];
+niveau_min = 		[1,	1,	3,	1,	1,	1,	1,	2,	2,	1,	1,	2];
+niveau_max = 		[5,	4,	5,	5,	3,	3,	5,	5,	5,	3,	3,	5];
+nb_style_min = 	[2,	3,	1,	1,	2,	2,	1,	1,	1,	1,	2,	1];
+style = [
+														{Rock,		Metal,		Jazz},
+														{Jazz,		Pop,		Classique,	Rock,	Funk},
+														{RnB,		Rap,		Classique},
+														{Pop,		Punk,		Electro},
+														{Classique,	Metal,		Jazz},
+														{Punk,		Rock,		Classique,	Jazz},
+														{Pop,		Rock,		Jazz,		Classique},
+														{Classique},
+														{Classique,	Jazz},
+														{Jazz, 		Electro},
+														{Jazz,		Rap,		Funk,		Rock,	Electro},
+														{Metal,		Pop,		Electro,	Jazz,	Classique}
+];
+
+instrument = [
+														Basse,
+														Batterie,
+														Guitare,
+														Batterie,
+														Violon,
+														Guitare,
+														Piano,
+														Violon,
+														Piano,
+														Piano,
+														Basse,
+														Basse
+];
+
+ville = [
+														Angers,
+														Nantes,
+														Angers,
+														Nantes,
+														Angers,
+														Angers,
+														Nantes,
+														Nantes,
+														Angers,
+														Nantes,
+														Nantes,
+														Angers
+];
