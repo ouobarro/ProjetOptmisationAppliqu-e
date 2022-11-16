@@ -1,3 +1,13 @@
+%___________________________________________________________________
+%    Nom :				BARRO, SYLLA, TOURE
+%	 Prénom :       	Juliette, Mohamed, Boubacar
+%    Date :             16/11/2022
+%    Master 2 Informatique à la faculté de sciences d'Angers    
+%___________________________________________________________________
+%    Objectif : Réalisation du Modèle 1 permettant d'assurer la
+%    formation d'un duo de musiciens
+%___________________________________________________________________
+
 include "globals.mzn";
 
 enum MUSICIEN;
@@ -14,7 +24,6 @@ set of int : NIVEAU_MAX;
 set of int : NB_STYLE_MIN;
 
 array[MUSICIEN] of var MUSICIEN : duo;
-
 array[MUSICIEN] of var NB_HEURE : nb_heure;
 array[MUSICIEN] of var NIVEAU : niveau;
 array[MUSICIEN] of var NB_HEURE_MIN : nb_heure_min;
@@ -22,19 +31,14 @@ array[MUSICIEN] of var NB_HEURE_MAX : nb_heure_max;
 array[MUSICIEN] of var NIVEAU_MIN : niveau_min;
 array[MUSICIEN] of var NIVEAU_MAX : niveau_max;
 array[MUSICIEN] of var NB_STYLE_MIN : nb_style_min;
+array[MUSICIEN] of var INSTRUMENT : instrument;
+array[MUSICIEN] of var VILLE : ville;
 array[MUSICIEN] of set of STYLE : style;
 
-array[MUSICIEN] of INSTRUMENT : instrument;
-
-array[MUSICIEN] of VILLE : ville;
-
 /*=============================Les contraintes==========================*/
-
-constraint all_different(duo);
-
+/*Les musiciens doivent être différents de leur duos*/
 constraint forall(m in MUSICIEN)(m != duo[m]);
-        
-        
+  
 /*Les duos habitent la même ville*/
 constraint forall(m in MUSICIEN)(ville[m] == ville[duo[m]]);
 
@@ -50,13 +54,14 @@ constraint forall(m in MUSICIEN)(card(style[m] intersect style[duo[m]]) >= nb_st
 constraint forall(m in MUSICIEN)(instrument[m] != instrument[duo[m]]);
 
 
-/*le niveau de chaque musicien du duo doit être dans l’intervalle de niveau accepté par
-l’autre musicien*/
+/*le niveau de chaque musicien du duo doit être dans l’intervalle de niveau accepté par l’autre musicien*/
 constraint forall(m in MUSICIEN)(niveau[m] in niveau_min[duo[m]]..niveau_max[duo[m]]);
 constraint forall(m in MUSICIEN)(niveau[duo[m]] in niveau_min[m]..niveau_max[m]);
 
 /*le duo est consistant : il s’agit donc d’un matching parfait, c’est à dire que si m est associé à m’ alors m’ est associé aussi à m*/
 constraint forall(m, n in MUSICIEN where n == duo[m]) (m == duo[n]);
+
+constraint all_different(duo);
 
 solve satisfy;
 
