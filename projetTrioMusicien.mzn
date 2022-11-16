@@ -57,7 +57,7 @@ constraint forall(m in MUSICIEN)(card(style[trio1[m]] intersect style[trio2[m]])
 /*deux musiciens jouant du même instrument ne peuvent former un trio*/
 constraint forall(m in MUSICIEN)(instrument[m] != instrument[trio1[m]] /\ instrument[m] != instrument[trio2[m]] /\ instrument[trio1[m]] != instrument[trio2[m]]);
 
-/*le niveau de chaque musicien du trio doit être dans l’intervalle de niveau accepté par l’autre musicien*/
+/*le niveau de chaque musicien du trio doit être dans l’intervalle de niveau accepté par l’autre musicien*//*
 constraint forall(m in MUSICIEN)(niveau[m] in niveau_min[trio1[m]]..niveau_max[trio1[m]] /\ niveau[trio1[m]] in niveau_min[m]..niveau_max[m]);
 constraint forall(m in MUSICIEN)(niveau[m] in niveau_min[trio2[m]]..niveau_max[trio2[m]] /\ niveau[trio2[m]] in niveau_min[m]..niveau_max[m]);
 constraint forall(m in MUSICIEN)(niveau[trio1[m]] in niveau_min[trio2[m]]..niveau_max[trio2[m]] /\ niveau[trio2[m]] in niveau_min[trio1[m]]..niveau_max[trio1[m]]);
