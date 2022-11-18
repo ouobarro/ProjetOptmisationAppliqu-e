@@ -38,14 +38,16 @@
                   <tr>
                     <th scope="row">{{ musicien.name }}</th>
                     <td scope="row">
-                        <input type="number" id="{{ musicien.name }} + '-heureHebdo'" name="{{ musicien.name }} + '-heureHebdo'" min="{{ musicien.heureMin }}" max="{{ musicien.heureMax }}" value="{{ musicien.heureHebdo }}" />
+                        {% with ""|add:musicien.name|add:"-heureHebdo" as myData %}
+                        <input type="number" id="{{ myData }}" name="{{ myData }}" min="{{ musicien.heureMin }}" max="{{ musicien.heureMax }}" value="{{ musicien.heureHebdo }}" />
+                        {% endwith %}
                     </td>
                     <td scope="row">
                         <input type="number" id="{{ musicien.name }} + '-niveau'" name="{{ musicien.name }} + '-niveau'" min="{{ musicien.nivMin }}" max="{{ musicien.nivMax }}" value="{{ musicien.niveau }}" />
                     </td>
                     <td scope="row">
-                        <select class="form-select" aria-label="Default select example" id="{{ musicien.name }} + '-instru'" name="{{ musicien.name }} + '-instru'">
-                            <option value="" selected></option>
+                        <select id="{{ musicien.name }} + '-instru'" name="{{ musicien.name }} + '-instru'">
+                            <option value="{{ musicien.instru }} selected></option>
                             <option value="Guitare">Guitare</option>
                             <option value="Batterie">Batterie</option>
                             <option value="Violon">Violon</option>
@@ -54,82 +56,96 @@
                         </select>
                     </td>
                     <td scope="row">
-                        <select class="form-select" aria-label="Default select example" id="{{ musicien.name }} + '-ville'" name="{{ musicien.name }} + '-ville'" value="{{ musicien.ville }}">
-                            <option value="" selected></option>
+                        <select id="{{ musicien.name }} + '-ville'" name="{{ musicien.name }} + '-ville'">
+                            <option value="{{ musicien.ville }} selected></option>
                             <option value="Angers">Angers</option>
                             <option value="Nantes">Nantes</option>
                         </select>
                     </td>
                     <td scope="row">
-                        <select class="form-select" aria-label="Default select example" id="{{ musicien.name }} + '-style1'" name="{{ musicien.name }} + '-style1'" >
-                            <option value="" selected></option>
-                            <option value="Rock">Rock</option>
-                            <option value="Metal">Metal</option>
-                            <option value="Jazz">Jazz</option>
-                            <option value="Pop">Pop</option>
-                            <option Classique="Classique">Classique</option>
-                            <option value="Funk">Funk</option>
-                            <option value="RnB">RnB</option>
-                            <option Classique="Rap">Rap</option>
-                            <option Classique="Punk">Punk</option>
-                            <option Classique="Electro">Electro</option>
-                        </select>
+                        <div class="row">
+                            <div class="col">
+                            {% with ""|add:musicien.name|add:"-heureHebdo" as myData2 %}
+                            <select id="{{ myData2 }}" name="{{ myData2 }}" >
+                                <option value="" selected></option>
+                                <option value="Rock">Rock</option>
+                                <option value="Metal">Metal</option>
+                                <option value="Jazz">Jazz</option>
+                                <option value="Pop">Pop</option>
+                                <option value="Classique">Classique</option>
+                                <option value="Funk">Funk</option>
+                                <option value="RnB">RnB</option>
+                                <option value="Rap">Rap</option>
+                                <option value="Punk">Punk</option>
+                                <option value="Electro">Electro</option>
+                            </select>
+                            {% endwith %}
+                            </div>
 
-                        <select class="form-select" aria-label="Default select example" id="{{ musicien.name }} + '-style2'" name="{{ musicien.name }} + '-style2'" >
-                            <option value="" selected></option>
-                            <option value="Rock">Rock</option>
-                            <option value="Metal">Metal</option>
-                            <option value="Jazz">Jazz</option>
-                            <option value="Pop">Pop</option>
-                            <option Classique="Classique">Classique</option>
-                            <option value="Funk">Funk</option>
-                            <option value="RnB">RnB</option>
-                            <option Classique="Rap">Rap</option>
-                            <option Classique="Punk">Punk</option>
-                            <option Classique="Electro">Electro</option>
-                        </select>
+                            <div class="col">
+                            <select id="{{ musicien.name }} + '-style2'" name="{{ musicien.name }} + '-style2'" >
+                                <option value="" selected></option>
+                                <option value="Rock">Rock</option>
+                                <option value="Metal">Metal</option>
+                                <option value="Jazz">Jazz</option>
+                                <option value="Pop">Pop</option>
+                                <option value="Classique">Classique</option>
+                                <option value="Funk">Funk</option>
+                                <option value="RnB">RnB</option>
+                                <option value="Rap">Rap</option>
+                                <option value="Punk">Punk</option>
+                                <option value="Electro">Electro</option>
+                            </select>
+                            </div>
 
-                        <select class="form-select" aria-label="Default select example" id="{{ musicien.name }} + '-style3'" name="{{ musicien.name }} + '-style3'" >
-                            <option value="" selected></option>
-                            <option value="Rock">Rock</option>
-                            <option value="Metal">Metal</option>
-                            <option value="Jazz">Jazz</option>
-                            <option value="Pop">Pop</option>
-                            <option Classique="Classique">Classique</option>
-                            <option value="Funk">Funk</option>
-                            <option value="RnB">RnB</option>
-                            <option Classique="Rap">Rap</option>
-                            <option Classique="Punk">Punk</option>
-                            <option Classique="Electro">Electro</option>
-                        </select>
+                            <div class="col">
+                            <select id="{{ musicien.name }} + '-style3'" name="{{ musicien.name }} + '-style3'" >
+                                <option value="" selected></option>
+                                <option value="Rock">Rock</option>
+                                <option value="Metal">Metal</option>
+                                <option value="Jazz">Jazz</option>
+                                <option value="Pop">Pop</option>
+                                <option value="Classique">Classique</option>
+                                <option value="Funk">Funk</option>
+                                <option value="RnB">RnB</option>
+                                <option value="Rap">Rap</option>
+                                <option value="Punk">Punk</option>
+                                <option value="Electro">Electro</option>
+                            </select>
+                            </div>
 
-                        <select class="form-select" aria-label="Default select example" id="{{ musicien.name }} + '-style4'" name="{{ musicien.name }} + '-style4'" >
-                            <option value="" selected></option>
-                            <option value="Rock">Rock</option>
-                            <option value="Metal">Metal</option>
-                            <option value="Jazz">Jazz</option>
-                            <option value="Pop">Pop</option>
-                            <option Classique="Classique">Classique</option>
-                            <option value="Funk">Funk</option>
-                            <option value="RnB">RnB</option>
-                            <option Classique="Rap">Rap</option>
-                            <option Classique="Punk">Punk</option>
-                            <option Classique="Electro">Electro</option>
-                        </select>
+                            <div class="col">
+                            <select id="{{ musicien.name }} + '-style4'" name="{{ musicien.name }} + '-style4'" >
+                                <option value="" selected></option>
+                                <option value="Rock">Rock</option>
+                                <option value="Metal">Metal</option>
+                                <option value="Jazz">Jazz</option>
+                                <option value="Pop">Pop</option>
+                                <option value="Classique">Classique</option>
+                                <option value="Funk">Funk</option>
+                                <option value="RnB">RnB</option>
+                                <option value="Rap">Rap</option>
+                                <option value="Punk">Punk</option>
+                                <option value="Electro">Electro</option>
+                            </select>
+                            </div>
 
-                        <select class="form-select" aria-label="Default select example" id="{{ musicien.name }} + '-style5'" name="{{ musicien.name }} + '-style5'" >
-                            <option value="" selected></option>
-                            <option value="Rock">Rock</option>
-                            <option value="Metal">Metal</option>
-                            <option value="Jazz">Jazz</option>
-                            <option value="Pop">Pop</option>
-                            <option Classique="Classique">Classique</option>
-                            <option value="Funk">Funk</option>
-                            <option value="RnB">RnB</option>
-                            <option Classique="Rap">Rap</option>
-                            <option Classique="Punk">Punk</option>
-                            <option Classique="Electro">Electro</option>
-                        </select>
+                            <div class="col">
+                            <select id="{{ musicien.name }} + '-style5'" name="{{ musicien.name }} + '-style5'" >
+                                <option value="" selected></option>
+                                <option value="Rock">Rock</option>
+                                <option value="Metal">Metal</option>
+                                <option value="Jazz">Jazz</option>
+                                <option value="Pop">Pop</option>
+                                <option value="Classique">Classique</option>
+                                <option value="Funk">Funk</option>
+                                <option value="RnB">RnB</option>
+                                <option value="Rap">Rap</option>
+                                <option value="Punk">Punk</option>
+                                <option value="Electro">Electro</option>
+                            </select>
+                            </div>
+                        </div>
                     </td>
                     <td scope="row">
                         <input type="number" id="{{ musicien.name }} + '-heureMin'" name="{{ musicien.name }} + '-heureMin'" min="{{ musicien.heureMin }}" max="{{ musicien.heureMax }}" value="{{ musicien.heureMin }}" />
