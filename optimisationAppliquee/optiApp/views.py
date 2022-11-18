@@ -6,9 +6,9 @@ from django.shortcuts import render
 
 # Create your views here.
 def index(request):
-    elements = genMusiciens()
+    musiciens = genMusiciens()
     context = {
-        'elements': elements,
+        'musiciens': musiciens,
     }
 
     return render(request, 'index.html',context)
@@ -16,11 +16,11 @@ def index(request):
 
 
 def afficheDuo(request):
-    elements = genMusiciens()
+    musiciens = genMusiciens()
     
     result_str=resolutionContrainte("projetDuoMusicien.mzn","projetDuoMusicien.dzn")
     context = {
         'propositionDuo': result_str,
-         'elements': elements,
+         'musiciens': musiciens,
     }
     return render(request, 'index.html',context)
