@@ -1,0 +1,44 @@
+
+
+def generateData(musiciens : list):
+    doc_complet=""
+    
+    if(len(musiciens)==12):
+        ligneMusicien ="MUSICIEN = 	{Alex,			Billie,			Chris,		Dora,		Emile,			Franck,		Gisele,		Horst, 		Iris, 		Jean,		Karl,		Lisa};"
+        ligneStyle = "STYLE = 		{Rock,			Metal,			Jazz, 		Pop, 		Classique,		Funk,		RnB,		Rap, 		Punk, 		Electro};"
+        ligneInstrument = "INSTRUMENT = 	{Guitare,		Batterie,		Violon,		Piano, 		Basse};"
+        ligneVille = "VILLE = 		{Angers,		Nantes};"
+        ligneNbHeure = "NB_HEURE = 		2..5;"
+        ligneNiveau = "NIVEAU = 			1..5;"
+        ligneNbHeureMin = "NB_HEURE_MIN = 	1..3;"
+        ligneNbHeureMax = "NB_HEURE_MAX = 	2..6;"
+        ligneNiveauMin = "NIVEAU_MIN = 		1..5;"
+        ligneNiveauMax = "NIVEAU_MAX = 		2..5;"
+        ligneStyleMin = "NB_STYLE_MIN = 	1..3;"
+        
+        #données récupérées
+        ligneNbHeureValue = "["
+        ligneNiveauValue = "["
+        ligneNbHeureMinValue = "["
+        ligneNbHeureMaxValue = "["
+        ligneNiveauMinValue = "["
+        ligneNiveauMaxValue = "["
+        ligneNbStyleMinValue = "["
+        
+        for musicien in musiciens:
+            ligneNbHeureValue += str(musicien.name+",")
+            ligneNiveauValue += str(musicien.niveau+",")
+            ligneNbHeureMinValue += str(musicien.heureMin+",")
+            ligneNbHeureMaxValue += str(musicien.heureMax+",")
+            ligneNiveauMinValue += str(musicien.nivMin+",")
+            ligneNiveauMaxValue += str(musicien.nivMax+",")
+            ligneNbStyleMinValue += str(musicien.styleMin+",")
+            
+        ligneNbHeureValue += "];"
+        ligneNiveauValue += "];"
+        ligneNbHeureMinValue += "];"
+        ligneNbHeureMaxValue += "];"
+        ligneNiveauMinValue += "];"
+        ligneNiveauMaxValue += "];"
+        ligneNbStyleMinValue += "];"
+        ligneNbHeureValue += "];"
