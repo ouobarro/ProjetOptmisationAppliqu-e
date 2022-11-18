@@ -2,8 +2,6 @@ import minizinc
 from minizinc import Instance, Model, Solver
 import os
 
-
-
 def resolutionContrainte(modelPath,DataPath):
     module_dir = os.path.dirname(__file__)  
     modeleFile = os.path.join(module_dir, modelPath)

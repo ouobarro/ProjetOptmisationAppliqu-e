@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -12,53 +12,153 @@
   </head>
   <body>
     <div class="container">
-        <h2>Table des musiciens</h2>
-        <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th scope="col" class="table-primary">Nom</th>
-                <th scope="col" class="table-primary">Nb heure hebdo</th>
-                <th scope="col" class="table-primary">Niv.</th>
-                <th scope="col" class="table-primary">Instru.</th>
-                <th scope="col" class="table-primary">ville</th>
-                <th scope="col" class="table-primary">Styles</th>
-                <th scope="col" class="table-primary">Nb heure Min</th>
-                <th scope="col" class="table-primary">Nb heure Max</th>
-                <th scope="col" class="table-primary">Niv min</th>
-                <th scope="col" class="table-primary">Niv max</th>
-                <th scope="col" class="table-primary">Niv styles min</th>
-              </tr>
-            </thead>
-            <tbody>
-                {% if elements %}
-            {% for element in elements %}   
-              <tr>
-                <th scope="row">{{ element.name }}</th>
-                <td scope="row">{{ element.heureHebdo }} </td>
-                <td scope="row">{{ element.niveau }} </td>
-                <td scope="row">{{ element.instru }} </td>
-                <td scope="row">{{ element.ville }} </td>
-                <td scope="row">{{ element.style }} </td>
-                <td scope="row">{{ element.heureMin }} </td>
-                <td scope="row">{{ element.heureMax }} </td>
-                <td scope="row">{{ element.nivMin }} </td>
-                <td scope="row">{{ element.nivMax }} </td>
-                <td scope="row">{{ element.styleMin }} </td>
-              </tr>
-            {% endfor %}
+        <form action="duo" method="POST">
+            {% csrf_token %}
+            {{form.as_ul}}
+            <h2>Table des musiciens</h2>
+            <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col" class="table-primary">Nom</th>
+                    <th scope="col" class="table-primary">Nb heure hebdo</th>
+                    <th scope="col" class="table-primary">Niv.</th>
+                    <th scope="col" class="table-primary">Instru.</th>
+                    <th scope="col" class="table-primary">ville</th>
+                    <th scope="col" class="table-primary">Styles</th>
+                    <th scope="col" class="table-primary">Nb heure Min</th>
+                    <th scope="col" class="table-primary">Nb heure Max</th>
+                    <th scope="col" class="table-primary">Niv min</th>
+                    <th scope="col" class="table-primary">Niv max</th>
+                    <th scope="col" class="table-primary">Niv styles min</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% if musiciens %}
+                {% for musicien in musiciens %}
+                  <tr>
+                    <th scope="row">{{ musicien.name }}</th>
+                    <td scope="row">
+                        <input type="number" id="{{ musicien.name }} + '-heureHebdo'" name="{{ musicien.name }} + '-heureHebdo'" min="{{ musicien.heureMin }}" max="{{ musicien.heureMax }}" value="{{ musicien.heureHebdo }}" />
+                    </td>
+                    <td scope="row">
+                        <input type="number" id="{{ musicien.name }} + '-niveau'" name="{{ musicien.name }} + '-niveau'" min="{{ musicien.nivMin }}" max="{{ musicien.nivMax }}" value="{{ musicien.niveau }}" />
+                    </td>
+                    <td scope="row">
+                        <select class="form-select" aria-label="Default select example" id="{{ musicien.name }} + '-instru'" name="{{ musicien.name }} + '-instru'">
+                            <option value="" selected></option>
+                            <option value="Guitare">Guitare</option>
+                            <option value="Batterie">Batterie</option>
+                            <option value="Violon">Violon</option>
+                            <option value="Violon">Piano</option>
+                            <option value="Violon">Basse</option>
+                        </select>
+                    </td>
+                    <td scope="row">
+                        <select class="form-select" aria-label="Default select example" id="{{ musicien.name }} + '-ville'" name="{{ musicien.name }} + '-ville'" value="{{ musicien.ville }}">
+                            <option value="" selected></option>
+                            <option value="Angers">Angers</option>
+                            <option value="Nantes">Nantes</option>
+                        </select>
+                    </td>
+                    <td scope="row">
+                        <select class="form-select" aria-label="Default select example" id="{{ musicien.name }} + '-style1'" name="{{ musicien.name }} + '-style1'" >
+                            <option value="" selected></option>
+                            <option value="Rock">Rock</option>
+                            <option value="Metal">Metal</option>
+                            <option value="Jazz">Jazz</option>
+                            <option value="Pop">Pop</option>
+                            <option Classique="Classique">Classique</option>
+                            <option value="Funk">Funk</option>
+                            <option value="RnB">RnB</option>
+                            <option Classique="Rap">Rap</option>
+                            <option Classique="Punk">Punk</option>
+                            <option Classique="Electro">Electro</option>
+                        </select>
+
+                        <select class="form-select" aria-label="Default select example" id="{{ musicien.name }} + '-style2'" name="{{ musicien.name }} + '-style2'" >
+                            <option value="" selected></option>
+                            <option value="Rock">Rock</option>
+                            <option value="Metal">Metal</option>
+                            <option value="Jazz">Jazz</option>
+                            <option value="Pop">Pop</option>
+                            <option Classique="Classique">Classique</option>
+                            <option value="Funk">Funk</option>
+                            <option value="RnB">RnB</option>
+                            <option Classique="Rap">Rap</option>
+                            <option Classique="Punk">Punk</option>
+                            <option Classique="Electro">Electro</option>
+                        </select>
+
+                        <select class="form-select" aria-label="Default select example" id="{{ musicien.name }} + '-style3'" name="{{ musicien.name }} + '-style3'" >
+                            <option value="" selected></option>
+                            <option value="Rock">Rock</option>
+                            <option value="Metal">Metal</option>
+                            <option value="Jazz">Jazz</option>
+                            <option value="Pop">Pop</option>
+                            <option Classique="Classique">Classique</option>
+                            <option value="Funk">Funk</option>
+                            <option value="RnB">RnB</option>
+                            <option Classique="Rap">Rap</option>
+                            <option Classique="Punk">Punk</option>
+                            <option Classique="Electro">Electro</option>
+                        </select>
+
+                        <select class="form-select" aria-label="Default select example" id="{{ musicien.name }} + '-style4'" name="{{ musicien.name }} + '-style4'" >
+                            <option value="" selected></option>
+                            <option value="Rock">Rock</option>
+                            <option value="Metal">Metal</option>
+                            <option value="Jazz">Jazz</option>
+                            <option value="Pop">Pop</option>
+                            <option Classique="Classique">Classique</option>
+                            <option value="Funk">Funk</option>
+                            <option value="RnB">RnB</option>
+                            <option Classique="Rap">Rap</option>
+                            <option Classique="Punk">Punk</option>
+                            <option Classique="Electro">Electro</option>
+                        </select>
+
+                        <select class="form-select" aria-label="Default select example" id="{{ musicien.name }} + '-style5'" name="{{ musicien.name }} + '-style5'" >
+                            <option value="" selected></option>
+                            <option value="Rock">Rock</option>
+                            <option value="Metal">Metal</option>
+                            <option value="Jazz">Jazz</option>
+                            <option value="Pop">Pop</option>
+                            <option Classique="Classique">Classique</option>
+                            <option value="Funk">Funk</option>
+                            <option value="RnB">RnB</option>
+                            <option Classique="Rap">Rap</option>
+                            <option Classique="Punk">Punk</option>
+                            <option Classique="Electro">Electro</option>
+                        </select>
+                    </td>
+                    <td scope="row">
+                        <input type="number" id="{{ musicien.name }} + '-heureMin'" name="{{ musicien.name }} + '-heureMin'" min="{{ musicien.heureMin }}" max="{{ musicien.heureMax }}" value="{{ musicien.heureMin }}" />
+                    </td>
+                    <td scope="row">
+                        <input type="number" id="{{ musicien.name }} + '-heureMax'" name="{{ musicien.name }} + '-heureMax'" min="{{ musicien.heureMin }}" max="{{ musicien.heureMax }}" value="{{ musicien.heureMax }}" />
+                    </td>
+                    <td scope="row">
+                        <input type="number" id="{{ musicien.name }} + '-nivMin'" name="{{ musicien.name }} + '-nivMin'" min="{{ musicien.nivMin }}" max="{{ musicien.nivMax }}" value="{{ musicien.nivMin }}" />
+                    </td>
+                    <td scope="row">
+                        <input type="number" id="{{ musicien.name }} + '-nivMax'" name="{{ musicien.name }} + '-nivMax'" min="{{ musicien.nivMin }}" max="{{ musicien.nivMax }}" value="{{ musicien.nivMax }}" />
+                    </td>
+                    <td scope="row">
+                        <input type="number" id="{{ musicien.name }} + '-styleMin'" name="{{ musicien.name }} + '-styleMin'" value="{{ musicien.styleMin }}" />
+                    </td>
+                  </tr>
+                {% endfor %}
+                {% endif %}
+                </tbody>
+              </table>
+
+            <button class="btn btn-outline-primary" type="submit">cliquer ici pour voir les duos formés</button>
+
+            {% if propositionDuo %}
+            <h3>Duos formés</h3>
+            <pre>{{propositionDuo}}</pre>
             {% endif %}
-            </tbody>
-          </table>
-        
-        <a class="btn btn-outline-primary" href="duo" role="button">cliquer ici pour voir les duos formés</a>
-    
-        {% if propositionDuo %}
-        <h3>Duos formés</h3>
-        <pre>{{propositionDuo}}</pre>
-        {% endif %}
-        
-        </div>
-    
-    
+        </form>
+    </div>
   </body>
 </html>

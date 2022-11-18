@@ -1,5 +1,3 @@
-
-
 def generateData(musiciens : list):
     doc_complet=""
     retourLigne ="\n"
