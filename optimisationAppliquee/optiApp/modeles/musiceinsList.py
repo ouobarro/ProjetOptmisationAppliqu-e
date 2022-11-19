@@ -17,5 +17,34 @@ def genMusiciens() :
     elements.append( Musicien('Lisa',3,4,'Basse','Angers','Metal, Pop, Electro, Jazz',3,6,2,5,1))
     return elements
 
-#def WriteConstrainnteInFile():
-    
+def modifiyMusicienData(elements :list,post):
+    if len(elements)>0:
+        for element in elements:
+            if (post.get(element.get_name()+"-heureHebdo") is not None):
+               element.set_heureHebdo(post.get(element.get_name()+"-heureHebdo"))
+               
+            if (post.get(element.get_name()+"-niveau") is not None):
+               element.set_niveau(post.get(element.get_name()+"-niveau"))
+               
+            if (post.get(element.get_name()+"-ville") is not None):
+               element.set_ville(post.get(element.get_name()+"-ville"))
+               
+            if (post.get(element.get_name()+"-instru") is not None):
+               element.set_instru(post.get(element.get_name()+"-instru"))
+            
+            if (post.get(element.get_name()+"-heureMin") is not None):
+               element.set_heureMin(post.get(element.get_name()+"-heureMin"))
+            
+            if (post.get(element.get_name()+"-heureMax") is not None):
+               element.set_heureMax(post.get(element.get_name()+"-heureMax"))
+            
+            if (post.get(element.get_name()+"-nivMin") is not None):
+               element.set_nivMin(post.get(element.get_name()+"-nivMin"))
+               
+            if (post.get(element.get_name()+"-nivMax") is not None):
+               element.set_nivMax(post.get(element.get_name()+"-nivMax"))
+               
+            if (post.get(element.get_name()+"-styleMin") is not None):
+               element.set_styleMin(post.get(element.get_name()+"-styleMin"))
+             
+    return elements
