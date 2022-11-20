@@ -11,6 +11,7 @@ def resolutionContrainte(modelPath,DataPath):
     gecode = Solver.lookup("gecode")
     instance = Instance(gecode, model)
     result = instance.solve()
+    print(result)
     result_to_str = str(result)
     return result_to_str
 
