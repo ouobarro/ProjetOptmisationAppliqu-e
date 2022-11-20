@@ -46,5 +46,10 @@ def modifiyMusicienData(elements :list,post):
                
             if (post.get(element.get_name()+"-styleMin") is not None):
                element.set_styleMin(post.get(element.get_name()+"-styleMin"))
+            if (post.getlist(element.get_name()+"-style") is not None):
+                listeStyle = post.getlist(element.get_name()+"-style")
+                #print(listeStyle)
+                listeStyleToStr = ",".join(str(x) for x in listeStyle)
+                element.set_style(listeStyleToStr)
              
     return elements

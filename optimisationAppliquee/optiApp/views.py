@@ -17,17 +17,27 @@ def index(request):
 
 
 def afficheDuo(request):
-    print(request.POST.get('Alex-heureHebdo'))
+
     musiciens = genMusiciens()
     #print("avant",musiciens[0].get_heureHebdo())
     musiciens = modifiyMusicienData(musiciens,request.POST)
     #print("après",musiciens[0].get_heureHebdo())
+    
     result_str=""
+    context ={}
+
     fichierPret =genereFichier(generateData(musiciens))
-    if(fichierPret):
-        result_str=resolutionContrainte("projetDuoMusicien.mzn","projetDuoMusicien.dzn")
-    context = {
-        'propositionDuo': result_str,
-         'musiciens': musiciens,
-    }
+    if(fichierPret and request.POST.get('duo') is not None):
+        result_str=resolutionContrainte("projetDuoMusicien.mzn","tmpData.dzn")
+        context = {
+            'propositionDuo': result_str,
+            'musiciens': musiciens,
+        }
+    elif fichierPret and request.POST.get('trio') is not None:
+        result_str=resolutionContrainte("projetTrioMusicien.mzn","tmpData.dzn")
+        context = {
+            'propositionTrio': result_str,
+            'musiciens': musiciens,
+        }
     return render(request, 'index.html',context)
+
