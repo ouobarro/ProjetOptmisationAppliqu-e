@@ -25,8 +25,10 @@ def afficheDuo(request):
     
     result_str=""
     context ={}
+    niveauChecked=False
+    heureChecked = False
 
-    fichierPret =genereFichier(generateData(musiciens))
+    fichierPret =genereFichier(generateData(musiciens),"tmpData.dzn")
     if(fichierPret and request.POST.get('duo') is not None):
         result_str=resolutionContrainte("projetDuoMusicien.mzn","tmpData.dzn")
         context = {
@@ -34,7 +36,13 @@ def afficheDuo(request):
             'musiciens': musiciens,
         }
     elif fichierPret and request.POST.get('trio') is not None:
-        result_str=resolutionContrainte("projetTrioMusicien.mzn","tmpData.dzn")
+        if(request.POST.get('contrainteHeure') is not None):
+            heureChecked=True
+        if(request.POST.get('contrainteNiveau') is not None):
+            niveauChecked=True
+            
+        fichierPret =genereFichier(generateTrio(heureChecked,niveauChecked),"tmpContrainte.mzn")
+        result_str=resolutionContrainte("tmpContrainte.mzn","tmpData.dzn")
         context = {
             'propositionTrio': result_str,
             'musiciens': musiciens,
