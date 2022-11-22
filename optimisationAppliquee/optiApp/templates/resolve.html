@@ -14,7 +14,7 @@
     {%include "navBar.html"%}
 
     <!-- LE CONTENU DE CHAQUE PAGE -->
-    <div class="myContainer">
+    <div class="myContainer mt-3 mb-3">
         <form action="solution" method="POST">
             {% csrf_token %}
             {{form.as_ul}}
