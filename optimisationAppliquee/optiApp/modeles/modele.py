@@ -10,9 +10,11 @@ def resolutionContrainte(modelPath,DataPath):
     model.add_file(str(modelData))
     gecode = Solver.lookup("gecode")
     instance = Instance(gecode, model)
-    result = instance.solve()
+    result = instance.solve(all_solutions=True)
     print(result)
-    result_to_str = str(result)
+    result_to_str=""
+    for i in range(len(result)):
+        result_to_str+=str(result[i,"_output_item"]+"\n\n")
     return result_to_str
 
 #print("pour le trio\n")
