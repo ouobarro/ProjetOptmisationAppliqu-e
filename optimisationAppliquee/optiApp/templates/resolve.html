@@ -132,14 +132,18 @@
                             <button class="btn btn-outline-primary" name='duo' type="submit">Click here to see the formed duos</button>
                             {% if propositionDuo %}
                             <h3>List of Duos</h3>
-                            <pre>{{propositionDuo}}</pre>
+                            <div class="resolveDiv">
+                                <pre>{{propositionDuo}}</pre>
+                            </div>
                             {% endif %}
                         </div>
                         <div class="col-6">
                             <button class="btn btn-outline-primary" name='trio'  type="submit">Click here to see the formed trios</button>
                             {% if propositionTrio %}
                             <h3>List of trios</h3>
-                            <pre>{{propositionTrio}}</pre>
+                            <div class="resolveDiv">
+                                <pre>{{propositionTrio}}</pre>
+                            </div>
                             {% endif %}
                         </div>
                 </div>
