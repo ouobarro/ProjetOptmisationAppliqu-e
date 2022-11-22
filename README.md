@@ -6,7 +6,8 @@ Traitement et création de modèle permettant de constituer des groupes selon de
     2. Installer Minizinc pour python et pour votre système d'exploitation (Linux)
     3. Installer Django pour assurer le demarrage du serveur web
     4. Installer l'IDE Pycharm Communtity (optionnel)
-    5. Ouvrer le terminal et exécuter la commande suivante : python3 leCheminAbsoluVersLeFichier/optimisationAppliquee/manage.py runserver
+    5. Ouvrer un terminal et exécuter la commande suivante :
+        -> python3 leCheminAbsoluVersLeFichier/optimisationAppliquee/manage.py runserver
     6. Vous verrez un message vous signalant que le serveur a demarré
     7. Cliquer sur le lien qui vous a été donné et vous serez rédiriger vers votre navigateur par défaut
     8. Vous pourrez enfin profiter de toutes les avantages de notre plateforme
