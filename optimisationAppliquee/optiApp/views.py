@@ -7,16 +7,23 @@ from optiApp.modeles.musicien import *
 from optiApp.modeles.generateData import *
 # Create your views here.
 def index(request):
+    #musiciens = genMusiciens()
+    #context = {
+     #   'musiciens': musiciens,
+    #}
+
+    return render(request, 'index.html')
+#return HttpResponse(result_str)
+
+def resolve(request):
     musiciens = genMusiciens()
     context = {
         'musiciens': musiciens,
     }
 
-    return render(request, 'index.html',context)
-#return HttpResponse(result_str)
+    return render(request, 'resolve.html',context)
 
-
-def afficheDuo(request):
+def afficheSolution(request):
 
     musiciens = genMusiciens()
     #print("avant",musiciens[0].get_heureHebdo())
@@ -47,5 +54,8 @@ def afficheDuo(request):
             'propositionTrio': result_str,
             'musiciens': musiciens,
         }
-    return render(request, 'index.html',context)
+    return render(request, 'resolve.html',context)
 
+
+def contact(request):
+    return render(request, 'contact.html')
