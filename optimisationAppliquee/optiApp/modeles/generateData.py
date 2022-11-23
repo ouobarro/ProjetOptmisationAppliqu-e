@@ -93,9 +93,11 @@ def generateTrio(contrainteHeure,contrainteNiveau):
     ligneContraintedifferenceMembreTrio = "/*les trios doivent être differents*/\nconstraint forall(m in MUSICIEN) (m != trio1[m] /\ m != trio2[m] /\ trio1[m] != trio2[m]);\n"
     ligneContrainteVille = "/*Les trios habitent la même ville*/\nconstraint forall(m in MUSICIEN) (ville[m] == ville[trio1[m]] /\ ville[m] == ville[trio2[m]]);\n"
     if contrainteHeure:
-        ligneContrainteHeure ="/*le nombre d’heures voulues doit être dans le créneau Min - Max souhaité par l’autre*/\nconstraint forall(m in MUSICIEN)(nb_heure[m] in nb_heure_min[trio1[m]]..nb_heure_max[trio1[m]] /\ nb_heure[m] in nb_heure_min[trio2[m]]..nb_heure_max[trio2[m]]);\nconstraint forall(m in MUSICIEN)(nb_heure[trio1[m]] in nb_heure_min[m]..nb_heure_max[m] /\ nb_heure[trio1[m]] in nb_heure_min[trio2[m]]..nb_heure_max[trio2[m]]);\nconstraint forall(m in MUSICIEN)(nb_heure[trio2[m]] in nb_heure_min[m]..nb_heure_max[m] /\ nb_heure[trio2[m]] in nb_heure_min[trio1[m]]..nb_heure_max[trio1[m]]);\n\n"
+        ligneContrainteHeure ="/*le nombre d’heures voulues doit être dans le créneau Min - Max souhaité par l’autre*/\nconstraint forall(m in MUSICIEN)(nb_heure[m] in min(nb_heure_min[trio1[m]],nb_heure_min[trio2[m]])..max(nb_heure_max[trio1[m]],nb_heure_max[trio2[m]]));\nconstraint forall(m in MUSICIEN)(nb_heure[trio1[m]] in min(nb_heure_min[m],nb_heure_min[trio2[m]])..max(nb_heure_max[m],nb_heure_max[trio2[m]]));\nconstraint forall(m in MUSICIEN)(nb_heure[trio2[m]] in min(nb_heure_min[m],nb_heure_min[trio1[m]])..max(nb_heure_max[m],nb_heure_max[trio1[m]]));\n\n"
     lignestyleCommun ="/*le nombre de style commun doit respecter les exigences de chacun*/\nconstraint forall(m in MUSICIEN)(card(style[m] intersect style[trio1[m]]) >= 1);\nconstraint forall(m in MUSICIEN)(card(style[m] intersect style[trio2[m]]) >= 1);\nconstraint forall(m in MUSICIEN)(card(style[trio1[m]] intersect style[trio2[m]]) >= 1);\n\n"
     ligneInstrument = "/*deux musiciens jouant du même instrument ne peuvent former un trio*/\nconstraint forall(m in MUSICIEN)(instrument[m] != instrument[trio1[m]] /\ instrument[m] != instrument[trio2[m]] /\ instrument[trio1[m]] != instrument[trio2[m]]);\n\n";
+    if contrainteNiveau:
+        ligneNiveau ="constraint forall(m in MUSICIEN)(niveau[m] in min(niveau_min[trio1[m]],niveau_min[trio2[m]])..max(niveau_max[trio1[m]],niveau_max[trio2[m]]));\nconstraint forall(m in MUSICIEN)(niveau[trio1[m]] in min(niveau_min[m],niveau_min[trio2[m]])..max(niveau_max[m],niveau_max[trio2[m]]));\nconstraint forall(m in MUSICIEN)(niveau[trio2[m]] in min(niveau_min[m],niveau_min[trio1[m]])..max(niveau_max[m],niveau_max[trio1[m]]));\n\n"
     ligneConsistante = "/*le trio est consistant : il s’agit donc d’un matching parfait, c’est à dire que si m est associé à m’ alors m’ est associé aussi à m*/\nconstraint forall(m, n, o in MUSICIEN where (n == trio1[m] /\ o == trio2[m]) \/ (n == trio2[m] /\ o == trio1[m])) ((m == trio1[n] \/ m == trio2[n]) /\ (m == trio2[o] \/ m == trio1[o]));\n\n"
     ligneAlldiff ="/*Les musiciens doivent être différents de leur duos*/\nconstraint all_different(trio1);\nconstraint all_different(trio2);\n\n"
     ligneSolve ="solve satisfy;\n\n"
@@ -111,6 +113,8 @@ def generateTrio(contrainteHeure,contrainteNiveau):
         doc_complet+=ligneContrainteHeure
     doc_complet+=lignestyleCommun
     doc_complet+=ligneInstrument
+    if contrainteNiveau:
+        doc_complet+=ligneNiveau
     doc_complet+=ligneConsistante
     doc_complet+=ligneAlldiff
     doc_complet+=ligneSolve
