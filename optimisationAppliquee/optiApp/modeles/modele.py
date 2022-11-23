@@ -15,6 +15,8 @@ def resolutionContrainte(modelPath,DataPath):
     result_to_str=""
     for i in range(len(result)):
         result_to_str+=str(result[i,"_output_item"]+"\n\n")
+    if result_to_str=="":
+        result_to_str="Unsatisfiable"
     return result_to_str
 
 #print("pour le trio\n")
